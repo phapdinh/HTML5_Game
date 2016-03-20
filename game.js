@@ -69,7 +69,7 @@ function myMouseMove(event) {
 
 function spawnRock() {
 	app.rock = {
-		pos: {x:Math.random() * app.width, y:Math.random() * -app.height},
+		pos: {x:Math.random() * app.width, y:0},
 		size: 120,
 		speed: 240,
 		color: "#FFFFFF",
