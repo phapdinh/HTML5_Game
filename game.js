@@ -34,18 +34,24 @@ function frameUpdate(timestamp) {
 	var rock = app.rock;
 	var rock2 = app.rock2;
 	var rock3 = app.rock3;
+	var rock4 = app.rock4;
 	rock.pos.y += rock.speed * dt;
 	rock2.pos.y += rock.speed * dt;
 	rock3.pos.y += rock.speed * dt;
+	rock4.pos.y += rock.speed * dt;
 	rock.speed++;
 	rock2.speed++;
 	rock3.speed++;
+	rock4.speed++;
 	
 	if(rock.pos.y > app.height) {
 		spawnRock();
 	}
 	
 	rock.checkHitHero(app.hero);
+	rock2.checkHitHero(app.hero);
+	rock3.checkHitHero(app.hero);
+	rock4.checkHitHero(app.hero);
 	
 	drawScene();
 }
@@ -62,6 +68,7 @@ function drawScene() {
 	drawObject(app.rock);
 	drawObject(app.rock2);
 	drawObject(app.rock3);
+	drawObject(app.rock4);
 }
 
 function drawObject(obj) {
@@ -110,6 +117,21 @@ function spawnRock() {
 	
 	app.rock3 = {
 		pos: {x:Math.floor(Math.random() * app.width), y:-200},
+		size: 120,
+		speed: 240,
+		image: app.rockImage,
+		checkHitHero: function(hero) {
+			var dist = getDistance(hero, this);
+			if(dist < 80) {
+				hero.state = 'exploded';
+				app.state = 'done';
+				hero.image = app.explosionImage;
+			}
+		}
+	}
+	
+	app.rock4 = {
+		pos: {x:Math.floor(Math.random() * app.width), y:-300},
 		size: 120,
 		speed: 240,
 		image: app.rockImage,
