@@ -8,13 +8,13 @@ function startApp() {
 	app.height = app.canvas.height;
 	
 	app.shipImage = new Image();
-	app.shipImage.src = "Penguins.jpg";
+	app.shipImage.src = "images/spaceship.png";
 	
 	app.rockImage = new Image();
-	app.rockImage.src = "Koala.jpg";
+	app.rockImage.src = "images/rock.png";
 	
 	app.explosionImage = new Image();
-	app.explosionImage.src = "Chrysanthemum.jpg";
+	app.explosionImage.src = "images/explosion.png";
 	
 	spawnHero();
 	spawnRock();
@@ -30,8 +30,10 @@ function frameUpdate(timestamp) {
 	app.lastTime = timestamp;
 	
 	var rock = app.rock;
-	rock.pos.y += rock.speed * dt;
-	if(rock.pos.y - rock.size > app.height) {
+	if(rock.pos.y < 512) {
+		rock.pos.y += rock.speed * dt;
+	}
+	if(rock.pos.y > app.height) {
 		spawnRock();
 	}
 	
@@ -69,9 +71,9 @@ function spawnRock() {
 	app.rock = {
 		pos: {x:Math.random() * app.width, y:Math.random() * -app.height},
 		size: 120,
-		speed: 150,
+		speed: 240,
 		color: "#FFFFFF",
-		image: app.shipImage,
+		image: app.rockImage,
 		checkHitHero: function(hero) {
 			var dist = getDistance(hero, this);
 			if(dist < 50) {
@@ -94,6 +96,6 @@ function spawnHero() {
 		pos: {x:400, y:400},
 		size: 60,
 		color: "#FFFF00",
-		image: app.rockImage
+		image: app.shipImage
 	};
 }
