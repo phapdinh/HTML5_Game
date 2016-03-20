@@ -29,7 +29,7 @@ function frameUpdate(timestamp) {
 	window.requestAnimationFrame(frameUpdate);
 	var dt = (timestamp - app.lastTime)/1000;
 	app.lastTime = timestamp;
-	app.timer.innerHTML = Math.floor(timestamp / 1000) + ' seconds';
+	app.timer.innerHTML = "Time Counter " + Math.floor(timestamp / 1000) + ' seconds';
 	
 	var rock = app.rock;
 	var rock2 = app.rock2;
