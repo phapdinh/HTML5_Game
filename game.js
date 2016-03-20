@@ -44,7 +44,7 @@ function frameUpdate(timestamp) {
 	rock3.speed++;
 	rock4.speed++;
 	
-	if(rock.pos.y > app.height) {
+	if(rock4.pos.y > app.height) {
 		spawnRock();
 	}
 	
