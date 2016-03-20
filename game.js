@@ -2,6 +2,7 @@ var app = {}
 
 function startApp() {
 	app.canvas = document.getElementById('canvas');
+	app.timer = document.getElementById('time');
 	app.ctx = canvas.getContext('2d');
 	
 	app.width = app.canvas.width;
@@ -28,11 +29,13 @@ function frameUpdate(timestamp) {
 	window.requestAnimationFrame(frameUpdate);
 	var dt = (timestamp - app.lastTime)/1000;
 	app.lastTime = timestamp;
+	app.timer.innerHTML = Math.floor(timestamp / 1000) + ' seconds';
 	
 	var rock = app.rock;
-	if(rock.pos.y < 512) {
-		rock.pos.y += rock.speed * dt;
-	}
+	var rock2 = app.rock2;
+	rock.pos.y += rock.speed * dt;
+	rock2.pos.y += rock.speed * dt;
+	
 	if(rock.pos.y > app.height) {
 		spawnRock();
 	}
@@ -52,6 +55,7 @@ function drawScene() {
 	drawObject(app.hero);
 	
 	drawObject(app.rock);
+	drawObject(app.rock2)
 }
 
 function drawObject(obj) {
@@ -69,10 +73,24 @@ function myMouseMove(event) {
 
 function spawnRock() {
 	app.rock = {
-		pos: {x:Math.random() * app.width, y:0},
+		pos: {x:Math.floor(Math.random() * app.width), y: 70},
 		size: 120,
 		speed: 240,
-		color: "#FFFFFF",
+		image: app.rockImage,
+		checkHitHero: function(hero) {
+			var dist = getDistance(hero, this);
+			if(dist < 50) {
+				hero.state = 'exploded';
+				app.state = 'done';
+				hero.image = app.explosionImage;
+			}
+		}
+	}
+	
+	app.rock2 = {
+		pos: {x:Math.floor(Math.random() * app.width), y:0},
+		size: 120,
+		speed: 240,
 		image: app.rockImage,
 		checkHitHero: function(hero) {
 			var dist = getDistance(hero, this);
@@ -95,7 +113,6 @@ function spawnHero() {
 	app.hero = {
 		pos: {x:400, y:400},
 		size: 60,
-		color: "#FFFF00",
 		image: app.shipImage
 	};
 }
