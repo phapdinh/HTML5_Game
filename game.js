@@ -33,8 +33,13 @@ function frameUpdate(timestamp) {
 	
 	var rock = app.rock;
 	var rock2 = app.rock2;
+	var rock3 = app.rock3;
 	rock.pos.y += rock.speed * dt;
 	rock2.pos.y += rock.speed * dt;
+	rock3.pos.y += rock.speed * dt;
+	rock.speed++;
+	rock2.speed++;
+	rock3.speed++;
 	
 	if(rock.pos.y > app.height) {
 		spawnRock();
@@ -55,7 +60,8 @@ function drawScene() {
 	drawObject(app.hero);
 	
 	drawObject(app.rock);
-	drawObject(app.rock2)
+	drawObject(app.rock2);
+	drawObject(app.rock3);
 }
 
 function drawObject(obj) {
@@ -73,13 +79,13 @@ function myMouseMove(event) {
 
 function spawnRock() {
 	app.rock = {
-		pos: {x:Math.floor(Math.random() * app.width), y: 70},
+		pos: {x:Math.floor(Math.random() * app.width), y: -100},
 		size: 120,
 		speed: 240,
 		image: app.rockImage,
 		checkHitHero: function(hero) {
 			var dist = getDistance(hero, this);
-			if(dist < 50) {
+			if(dist < 80) {
 				hero.state = 'exploded';
 				app.state = 'done';
 				hero.image = app.explosionImage;
@@ -94,7 +100,22 @@ function spawnRock() {
 		image: app.rockImage,
 		checkHitHero: function(hero) {
 			var dist = getDistance(hero, this);
-			if(dist < 50) {
+			if(dist < 80) {
+				hero.state = 'exploded';
+				app.state = 'done';
+				hero.image = app.explosionImage;
+			}
+		}
+	}
+	
+	app.rock3 = {
+		pos: {x:Math.floor(Math.random() * app.width), y:-200},
+		size: 120,
+		speed: 240,
+		image: app.rockImage,
+		checkHitHero: function(hero) {
+			var dist = getDistance(hero, this);
+			if(dist < 80) {
 				hero.state = 'exploded';
 				app.state = 'done';
 				hero.image = app.explosionImage;
