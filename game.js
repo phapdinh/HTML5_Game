@@ -80,7 +80,7 @@ function drawObject(obj) {
 }
 
 function myMouseMove(event) {
-	app.hero.pos.x = event.pageX;
+	app.hero.pos.x = event.pageX - document.body.offsetWidth/5;
 	app.hero.pos.y = event.pageY;
 }
 
