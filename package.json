@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/phapdinh/HTML5_Game/issues"
   },
-  "homepage": "https://github.com/phapdinh/HTML5_Game#readme"
+  "homepage": "https://github.com/phapdinh/HTML5_Game#readme",
+  "dependencies": {
+    "hapi": "^16.1.0"
+  }
 }
