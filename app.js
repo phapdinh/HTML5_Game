@@ -33,7 +33,7 @@ server.register(require('inert'), function(err) {
 
 	    server.route({
 		            method: 'GET',
-		            path: '/img/{file*}',
+		            path: '/images/{file*}',
 		            handler: {
 				                directory: {
 							                path: 'img'
