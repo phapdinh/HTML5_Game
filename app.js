@@ -36,7 +36,7 @@ server.register(require('inert'), function(err) {
 		            path: '/images/{file*}',
 		            handler: {
 				                directory: {
-							                path: 'img'
+							                path: 'images'
 							            }
 				            }
 		        });
