@@ -41,6 +41,16 @@ server.register(require('inert'), function(err) {
 			}
 		});
 
+		server.route({
+		    method: 'GET',
+		    path: '/videos/{file*}',
+		    handler: {
+				directory: {
+					path: 'videos'
+				}
+			}
+		});
+
 	    server.route({
 		    method: 'GET',
 		    path: '/',
@@ -56,6 +66,14 @@ server.register(require('inert'), function(err) {
 				reply.file('./indexBootstrap.html');
 			}
 		});
+
+		server.route({
+			method: 'GET',
+			path: '/video',
+			handler: function (request, reply) {
+				reply.file('./indexVideo.html');
+			}
+		})
 	});
 
 
